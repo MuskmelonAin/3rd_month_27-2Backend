@@ -37,7 +37,7 @@ Code 1
 
 '''
 в терминале :
-python lesson2.py
+python lesson3.2.py
 '''
 
 
@@ -70,9 +70,3 @@ Code 2
 #     window=MainWindow()
 #     window.show()
 #     sys.exit(app.exec())
-
-
-'''
-Code 3
-'''
-
