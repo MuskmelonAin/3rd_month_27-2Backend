@@ -33,7 +33,7 @@ def main():
     db = DBHelper()
 
     if args.cmd == 'add':
-        uid = db.add_user(args.name, args.age, args.email)
+        uid = db.add_user(args.name, args.age, args.email, args.city)
         print(f'✅ Пользователь создан с ID={uid}')
 
     elif args.cmd == 'list':

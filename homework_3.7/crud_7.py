@@ -16,7 +16,8 @@ def create_table():
             name TEXT NOT NULL,
             age INTEGER,
             email TEXT UNIQUE,
-            phone TEXT
+            phone TEXT,
+            birth_date TEXT
         )
     """)
     conn.commit()
@@ -25,29 +26,29 @@ def create_table():
 def sanitize(value):
     return value if value.strip() else None
 
-def insert_user(name, age, email, phone):
+def insert_user(name, age, email, phone, birth_date):
     conn = connect_db()
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            INSERT INTO users (name, age, email, phone)
-            VALUES (?, ?, ?, ?)
-        """, (name, age, sanitize(email), sanitize(phone)))
+            INSERT INTO users (name, age, email, phone, birth_date)
+            VALUES (?, ?, ?, ?, ?)
+        """, (name, age, sanitize(email), sanitize(phone), birth_date))
         conn.commit()
     except sqlite3.IntegrityError as e:
         raise Exception(f"Ошибка добавления: {e}")
     finally:
         conn.close()
 
-def update_user(user_id, name, age, email, phone):
+def update_user(user_id, name, age, email, phone, birth_date):
     conn = connect_db()
     cursor = conn.cursor()
     try:
         cursor.execute("""
             UPDATE users
-            SET name = ?, age = ?, email = ?, phone = ?
+            SET name = ?, age = ?, email = ?, phone = ?, birth_date = ?
             WHERE id = ?
-        """, (name, age, sanitize(email), sanitize(phone), user_id))
+        """, (name, age, sanitize(email), sanitize(phone), birth_date, user_id))
         conn.commit()
         return cursor.rowcount
     except sqlite3.IntegrityError as e:
