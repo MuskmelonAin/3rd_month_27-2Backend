@@ -49,7 +49,7 @@ def update_user(user_id, name, age, email, phone, birth_date, status):
             UPDATE users
             SET name = ?, age = ?, email = ?, phone = ?, birth_date = ?, status = ?
             WHERE id = ?
-        """, (name, age, sanitize(email), sanitize(phone), birth_date, user_id, status))
+        """, (name, age, sanitize(email), sanitize(phone), birth_date, status, user_id))
         conn.commit()
         return cursor.rowcount
     except sqlite3.IntegrityError as e:
